@@ -29,8 +29,8 @@ config = Script.get_config()
 tmp_dir = Script.get_tmp_dir()
 stack_root = Script.get_stack_root()
 # Hue download url
-download_url = 'echo http://gethue.com/downloads/hue-3.11.0.tgz'
-hue_version_dir = 'hue-3.11.0'
+download_url = 'echo http://gethue.com/downloads/releases/4.0.1/hue-4.0.1.tgz'
+hue_version_dir = 'hue-4.0.0'
 # New Cluster Stack Version that is defined during the RESTART of a Rolling Upgrade
 version = default("/commandParams/version", None)
 stack_name = default("/hostLevelParams/stack_name", None)

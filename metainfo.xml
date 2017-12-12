@@ -71,9 +71,9 @@
 	      <package><name>wget</name></package>   
 	      <package><name>tar</name></package>
 	      <package><name>asciidoc</name></package>
-	      <package><name>krb5-devel</name></package>
-	      <package><name>libxml2-devel</name></package>
-	      <package><name>libxslt-devel</name></package>		   
+	      <package><name>libkrb5-dev</name></package>
+	      <package><name>libxml2-dev</name></package>
+	      <package><name>libxslt-dev</name></package>		   
 	      <package><name>openldap-devel</name></package>
 	      <package><name>python-devel</name></package>
 	      <package><name>python-simplejson</name></package>

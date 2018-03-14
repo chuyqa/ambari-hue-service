@@ -73,7 +73,7 @@
 	      <package><name>asciidoc</name></package>
 	      <package><name>krb5-user</name></package>
 	      <package><name>libxml2</name></package>
-	      <package><name>libxslt</name></package>		   
+	      <package><name>libxslt1-dev</name></package>		   
 	      <package><name>ldap-utils</name></package>
 	      <package><name>python</name></package>
 	      <package><name>python-simplejson</name></package>

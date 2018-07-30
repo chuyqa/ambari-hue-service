@@ -57,7 +57,7 @@ def download_hue():
   Execute('{0} | xargs wget -O {1}/hue.tgz'.format(params.download_url,params.hue_install_dir))
   Execute('tar -zxvf {0}/hue.tgz -C {0} && rm -f {0}/hue.tgz'.format(params.hue_install_dir))
   Execute('rm -rf {0}/hue'.format(params.hue_install_dir))
-  Execute('cd {0}/hue-* && make install > /var/tmp/hue_install.log'.format(params.hue_install_dir))
+  Execute('source /etc/profile && cd {0}/hue-* && make install > /var/tmp/hue_install.log'.format(params.hue_install_dir))
   Execute('rm -rf {0}/hue-*'.format(params.hue_install_dir))
   # Ensure all Hue files owned by hue
   Execute('chown -R {0}:{1} {2}'.format(params.hue_user,params.hue_group,params.hue_dir))

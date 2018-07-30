@@ -29,8 +29,8 @@ config = Script.get_config()
 tmp_dir = Script.get_tmp_dir()
 stack_root = Script.get_stack_root()
 # Hue download url
-download_url = 'echo https://www.dropbox.com/s/auwpqygqgdvu1wj/hue-4.1.0.tgz'
-#hue_version_dir = 'hue-4.0.0'
+download_url='echo https://www.dropbox.com/s/0rhrlnjmyw6bnfc/hue-4.2.0.tgz'
+#download_url = 'echo https://github.com/cloudera/hue/archive/release-4.1.0.tar.gz'
 # New Cluster Stack Version that is defined during the RESTART of a Rolling Upgrade
 version = default("/commandParams/version", None)
 stack_name = default("/hostLevelParams/stack_name", None)
@@ -85,7 +85,7 @@ if hue_spark_module_enabled == 'No':
 app_blacklists = list(set(app_blacklists))
 app_blacklist = ','.join(app_blacklists)
 
-java_home = config['hostLevelParams']['java_home']
+java_home = config['ambariLevelParams']['java_home']
 http_host = config['hostname']
 http_port = config['configurations']['hue-env']['http_port']
 hue_pid_dir = config['configurations']['hue-env']['hue_pid_dir']
@@ -209,7 +209,7 @@ hadoop_bin_dir = stack_select.get_hadoop_dir('bin')
 hadoop_conf_dir = conf_select.get_hadoop_conf_dir()
 hdfs_site = config['configurations']['hdfs-site']
 default_fs = config['configurations']['core-site']['fs.defaultFS']
-dfs_type = default("/commandParams/dfs_type", "")
+dfs_type = default("/clusterLevelParams/dfs_type", "").lower()
 hdfs_user_keytab = config['configurations']['hadoop-env']['hdfs_user_keytab']
 hdfs_principal_name = config['configurations']['hadoop-env']['hdfs_principal_name']
 kinit_path_local = get_kinit_path(default('/configurations/kerberos-env/executable_search_paths', None))
@@ -232,8 +232,13 @@ HdfsResource = functools.partial(
 )
 
 # configurations of Yarn
-resourcemanager_hosts = default("/clusterHostInfo/rm_host", [])
-resourcemanager_host = str(resourcemanager_hosts)
+# resourcemanager_hosts = default("/clusterHostInfo/rm_host", [])
+# resourcemanager_host = str(resourcemanager_hosts)
+
+# new 3.0
+resourcemanager_hosts = default("/clusterHostInfo/resourcemanager_hosts", None)
+if type(resourcemanager_hosts) is list:
+  resourcemanager_host = resourcemanager_hosts[0]
 resourcemanager_port = config['configurations']['yarn-site']['yarn.resourcemanager.address'].split(':')[-1]
 resourcemanager_ha_enabled = False
 if len(resourcemanager_hosts) > 1:
@@ -252,8 +257,9 @@ else:
   resourcemanager_webapp_address1 = config['configurations']['yarn-site']['yarn.resourcemanager.webapp.address']
   resourcemanager_api_url1 = format('http://{resourcemanager_webapp_address1}')
   proxy_api_url1 = resourcemanager_api_url1
-histroryserver_host = default("/clusterHostInfo/hs_host", [])
-history_server_api_url = format('http://{histroryserver_host[0]}:19888')
+#histroryserver_host = default("/clusterHostInfo/hs_host", [])
+historyserver_host = default("/clusterHostInfo/historyserver_hosts", [])
+history_server_api_url = format('http://{historyserver_host[0]}:19888')
 slave_hosts = default("/clusterHostInfo/slave_hosts", [])
 
 # configurations of Oozie

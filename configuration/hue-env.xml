@@ -46,6 +46,39 @@
 
   <property>
     <name>hue_user</name>
+    <display-name>Hue User</display-name>
+    <value>hue</value>
+    <property-type>USER</property-type>
+    <value-attributes>
+      <type>user</type>
+      <overridable>false</overridable>
+      <user-groups>
+        <property>
+            <type>cluster-env</type>
+            <name>user_group</name>
+        </property>
+        <property>
+            <type>hue-env</type>
+            <name>hue_group</name>
+        </property>
+      </user-groups>
+    </value-attributes>
+    <on-ambari-upgrade add="false"/>
+  </property>
+  <property>
+      <name>hue_group</name>
+      <display-name>Hue Group</display-name>
+      <value>hue</value>
+      <property-type>GROUP</property-type>
+      <description>hue group</description>
+      <value-attributes>
+          <type>user</type>
+      </value-attributes>
+      <on-ambari-upgrade add="false"/>
+  </property>
+
+<!--  <property>
+    <name>hue_user</name>
     <value>hue</value>
     <display-name>Hue User</display-name>
     <property-type>USER</property-type>
@@ -69,6 +102,7 @@
     </value-attributes>
     <on-ambari-upgrade add="true"/>
   </property>
+-->
 
   <property>
     <name>http_host</name>
